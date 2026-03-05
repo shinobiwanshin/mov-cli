@@ -1,0 +1,2 @@
+[console_scripts]
+mov-cli = mov_cli.cli:main

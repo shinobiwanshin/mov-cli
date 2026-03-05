@@ -1,0 +1,134 @@
+Metadata-Version: 2.4
+Name: mov-cli
+Version: 1.0.0
+Summary: 🎬 Search and stream movies from the terminal.
+Home-page: https://github.com/mov-cli/mov-cli
+Author: mov-cli contributors
+License: MIT
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Multimedia :: Video
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.28.0
+Requires-Dist: rich>=13.0.0
+Requires-Dist: beautifulsoup4>=4.12.0
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# 🎬 mov-cli
+
+A terminal-based movie search and streaming tool inspired by [ani-cli](https://github.com/pystardust/ani-cli). Search for movies, pick one, and stream it — all from the command line.
+
+**No API keys required.** Searches IMDb directly and streams via VidSrc.
+
+---
+
+## Features
+
+- **Search** movies by scraping [IMDb](https://www.imdb.com/) — no API key needed
+- **Rich CLI** with colored tables, spinners, and error panels
+- **Stream** directly in [IINA](https://iina.io/) via VidSrc
+- **Dual search** — suggestion API with BeautifulSoup scrape fallback
+- **Modular** codebase, ready for extensions (TV shows, subtitles, providers)
+
+## Prerequisites
+
+| Dependency  | Install                               |
+| ----------- | ------------------------------------- |
+| Python 3.9+ | [python.org](https://www.python.org/) |
+| IINA        | `brew install --cask iina`            |
+
+## Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/mov-cli/mov-cli.git
+cd mov-cli
+
+# Install in editable mode
+pip install -e .
+```
+
+## Usage
+
+```bash
+mov-cli <movie name>
+```
+
+### Example
+
+```
+$ mov-cli interstellar
+
+ 🎬 Search Results
+┌──────┬──────────────────────────────┬──────┬─────────────────────────────────────────┐
+│    # │ Title                        │ Year │ Cast                                    │
+├──────┼──────────────────────────────┼──────┼─────────────────────────────────────────┤
+│    1 │ Interstellar                 │ 2014 │ Matthew McConaughey, Anne Hathaway      │
+│    2 │ Interstellar Wars            │ 2016 │ ...                                     │
+└──────┴──────────────────────────────┴──────┴─────────────────────────────────────────┘
+
+Select movie (number): 1
+
+✓  Selected: Interstellar (2014)  IMDb: tt0816692
+
+▶  Opening stream in IINA...
+   https://vidsrc.icu/embed/movie?imdb=tt0816692
+```
+
+## Project Structure
+
+```
+mov-cli/
+├── mov_cli/
+│   ├── __init__.py       # Package version
+│   ├── cli.py            # Argument parsing & user interaction
+│   ├── imdb_search.py    # IMDb search (suggestion API + scrape fallback)
+│   ├── stream.py         # VidSrc URL builder (IMDb ID based)
+│   ├── player.py         # IINA launcher
+│   └── utils.py          # Config, constants & helpers
+├── main.py               # Standalone entry point
+├── setup.py              # Package setup
+├── requirements.txt      # Dependencies
+└── README.md
+```
+
+## How It Works
+
+```
+User types movie name
+        ↓
+IMDb suggestion API search (+ scrape fallback)
+        ↓
+Select movie interactively
+        ↓
+Generate VidSrc URL with IMDb ID
+        ↓
+Launch IINA
+```
+
+## Planned Enhancements
+
+- [ ] Fuzzy search with fzf
+- [ ] Watch history
+- [ ] Trending movies
+- [ ] TV show support
+- [ ] Subtitle support
+- [ ] Auto-detect player (mpv, vlc, iina)
+- [ ] Multiple providers (vidsrc, moviesjoy, lookmovie)
+
+## License
+
+MIT

@@ -1,0 +1,14 @@
+README.md
+setup.py
+mov_cli/__init__.py
+mov_cli/cli.py
+mov_cli/imdb_search.py
+mov_cli/player.py
+mov_cli/stream.py
+mov_cli/utils.py
+mov_cli.egg-info/PKG-INFO
+mov_cli.egg-info/SOURCES.txt
+mov_cli.egg-info/dependency_links.txt
+mov_cli.egg-info/entry_points.txt
+mov_cli.egg-info/requires.txt
+mov_cli.egg-info/top_level.txt
